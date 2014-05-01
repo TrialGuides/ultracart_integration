@@ -6,6 +6,12 @@ gem 'httparty', '~> 0.13.1'
 gem 'aws-sdk',  '~> 1.39.0'
 gem 'carmen',   '~> 1.0.1'
 
+group :production do
+  gem 'newrelic_rpm'
+  gem 'foreman'
+  gem 'unicorn'
+end
+
 group :test do
   gem 'rspec',       '~> 2.14.1'
   gem 'rspec-mocks', '~> 2.14.6'
