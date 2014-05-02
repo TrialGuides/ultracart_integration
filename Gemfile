@@ -6,7 +6,7 @@ gem 'httparty', '~> 0.13.1'
 gem 'aws-sdk',  '~> 1.39.0'
 gem 'carmen',   '~> 1.0.1'
 
-group :production do
+group :production, :staging do
   gem 'newrelic_rpm'
   gem 'foreman'
   gem 'unicorn'
