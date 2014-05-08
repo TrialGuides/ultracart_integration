@@ -10,7 +10,7 @@ describe UltraCartConnector do
     AWS::S3::Bucket.any_instance.stub_chain(:objects, [], :write)
     
     request = xml_fixture('ar')
-    post '/xml_post_back', request
+    post '/', request
   end
   
   it 'responds to AR XML correctly' do
@@ -18,7 +18,7 @@ describe UltraCartConnector do
     stub = stub_request(:post, HUB_ENDPOINT).with(body: hub_json, headers: @headers)
 
     request = xml_fixture('ar')
-    post '/xml_post_back', request
+    post '/', request
 
     stub.should have_been_requested
     expect(last_response).to be_ok
@@ -29,7 +29,7 @@ describe UltraCartConnector do
     stub = stub_request(:post, HUB_ENDPOINT).with(body: hub_json, headers: @headers)
 
     request = xml_fixture('sd')
-    post '/xml_post_back', request
+    post '/', request
 
     stub.should have_been_requested
     expect(last_response).to be_ok
@@ -40,7 +40,7 @@ describe UltraCartConnector do
     stub = stub_request(:post, HUB_ENDPOINT).with(body: hub_json, headers: @headers)
 
     request = xml_fixture('rej')
-    post '/xml_post_back', request
+    post '/', request
 
     stub.should have_been_requested
     expect(last_response).to be_ok
@@ -51,7 +51,7 @@ describe UltraCartConnector do
     stub = stub_request(:post, HUB_ENDPOINT).with(body: hub_json, headers: @headers)
 
     request = xml_fixture('co')
-    post '/xml_post_back', request
+    post '/', request
 
     stub.should have_been_requested
     expect(last_response).to be_ok
@@ -62,7 +62,7 @@ describe UltraCartConnector do
     stub = stub_request(:post, HUB_ENDPOINT).with(body: hub_json, headers: @headers)
 
     request = xml_fixture('co_no_sub')
-    post '/xml_post_back', request
+    post '/', request
 
     stub.should have_been_requested
     expect(last_response).to be_ok
@@ -72,7 +72,7 @@ describe UltraCartConnector do
     stub_request(:post, HUB_ENDPOINT).to_timeout
 
     request = xml_fixture('co')
-    post '/xml_post_back', request
+    post '/', request
 
     expect(last_response).to_not be_ok
   end

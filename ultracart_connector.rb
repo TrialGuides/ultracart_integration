@@ -10,7 +10,7 @@ class UltraCartConnector < Sinatra::Base
     @order = UltraCartOrder.new(request.body.read)
   end
 
-  post '/xml_post_back' do
+  post '/' do
     S3Archiver.data(@order)
     response = HTTParty.post(
       HUB_ENDPOINT,
