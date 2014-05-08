@@ -19,7 +19,9 @@ class UltraCartConnector < Sinatra::Base
       headers: {
         'X-Hub-Store'        => ENV['HUB_STORE'],
         'X-Hub-Access-Token' => ENV['HUB_ACCESS_TOKEN']
-      }
+      },
+      # TODO: Enable verification once SSL issue is resolved
+      verify: false
     )
     [response.code, {}, response.body]
   end
