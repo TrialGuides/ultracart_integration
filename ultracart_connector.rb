@@ -23,6 +23,6 @@ class UltraCartConnector < Sinatra::Base
       # TODO: Enable verification once SSL issue is resolved
       verify: false
     )
-    [response.code, {}, response.body]
+    [response.code < 300 ? 200 : response.code, {}, response.body]
   end
 end
