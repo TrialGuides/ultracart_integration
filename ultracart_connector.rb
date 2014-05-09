@@ -1,7 +1,7 @@
 require 'json'
 
-HUB_ENDPOINT = 'https://push.hubapp.io'
-HUB_TIMEOUT = 240
+HUB_ENDPOINT = ENV['HUB_ENDPOINT'] || 'https://wombat.co/push'
+HUB_TIMEOUT = ENV['HUB_TIMEOUT'] || 240
 
 class UltraCartConnector < Sinatra::Base
   attr_reader :payload
