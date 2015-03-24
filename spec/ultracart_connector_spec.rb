@@ -5,14 +5,6 @@ describe UltraCartConnector do
     @headers = { 'X-Hub-Store' => ENV['HUB_STORE'], 'X-Hub-Access-Token' => ENV['HUB_ACCESS_TOKEN'] }
   end
 
-  it 'archives XML to s3' do
-    AWS::S3.any_instance.should_receive(:buckets)
-    AWS::S3::Bucket.any_instance.stub_chain(:objects, [], :write)
-    
-    request = xml_fixture('ar')
-    post '/', request
-  end
-  
   it 'responds to AR XML correctly' do
     hub_json = json_fixture('ar')
     stub = stub_request(:post, HUB_ENDPOINT).with(body: hub_json, headers: @headers)

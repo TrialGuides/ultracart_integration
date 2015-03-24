@@ -2,9 +2,6 @@ GEM
   remote: https://rubygems.org/
   specs:
     addressable (2.3.6)
-    aws-sdk (1.39.0)
-      json (~> 1.4)
-      nokogiri (>= 1.4.4)
     carmen (1.0.1)
       unicode_utils (~> 1.4.0)
     crack (0.4.2)
@@ -58,7 +55,6 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  aws-sdk (~> 1.39.0)
   carmen (~> 1.0.1)
   foreman
   httparty (~> 0.13.1)

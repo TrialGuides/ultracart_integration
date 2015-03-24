@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'sinatra',  '~> 1.4.5'
 gem 'nokogiri', '~> 1.6.1'
 gem 'httparty', '~> 0.13.1'
-gem 'aws-sdk',  '~> 1.39.0'
 gem 'carmen',   '~> 1.0.1'
 
 group :production, :staging do

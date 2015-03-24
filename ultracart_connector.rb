@@ -11,7 +11,6 @@ class UltraCartConnector < Sinatra::Base
   end
 
   post '/' do
-    S3Archiver.data(@order)
     response = HTTParty.post(
       HUB_ENDPOINT,
       body: SpreeObject.data(@order).to_json,

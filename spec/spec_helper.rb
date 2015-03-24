@@ -8,8 +8,6 @@ require 'webmock/rspec'
 require File.join(File.dirname(__FILE__), '..', 'lib', 'ultracart_connector')
 require File.join(File.dirname(__FILE__), '..', 'ultracart_connector')
 
-AWS.stub!
-
 Sinatra::Base.environment = 'test'
 
 def app
@@ -31,6 +29,3 @@ end
 ENV['HUB_STORE'] = '<<<HUB_STORE>>>'
 ENV['HUB_ACCESS_TOKEN'] = '<<<HUB_ACCESS_TOKEN>>>'
 ENV['EMAIL_LIST'] = '<<<EMAIL_LIST>>>'
-ENV['AWS_ACCESS_KEY_ID'] = '<<<AWS_ACCESS_KEY>>>'
-ENV['AWS_SECRET_ACCESS_KEY'] = '<<<AWS_SECRET_ACCESS_KEY>>>'
-ENV['AWS_S3_BUCKET'] = '<<<AWS_S3_BUCKET>>>'

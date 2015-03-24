@@ -7,5 +7,3 @@ require 'models/shipment'
 require 'models/subscription'
 
 require 'models/ultracart_order'
-
-require 's3_archiver'
