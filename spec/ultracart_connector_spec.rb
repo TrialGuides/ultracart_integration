@@ -7,7 +7,7 @@ describe UltraCartConnector do
 
   it 'responds to AR XML correctly' do
     hub_json = json_fixture('ar')
-    stub = stub_request(:post, HUB_ENDPOINT).with(body: hub_json, headers: @headers)
+    stub = stub_request(:post, HUB_ENDPOINT).with { |request| JSON.parse(request.body) == hub_json && request.headers == @headers }
 
     request = xml_fixture('ar')
     post '/', request
@@ -18,7 +18,7 @@ describe UltraCartConnector do
 
   it 'responds to SD XML correctly' do
     hub_json = json_fixture('sd')
-    stub = stub_request(:post, HUB_ENDPOINT).with(body: hub_json, headers: @headers)
+    stub = stub_request(:post, HUB_ENDPOINT).with { |request| JSON.parse(request.body) == hub_json && request.headers == @headers }
 
     request = xml_fixture('sd')
     post '/', request
@@ -29,7 +29,7 @@ describe UltraCartConnector do
 
   it 'responds to REJ XML correctly' do
     hub_json = json_fixture('rej')
-    stub = stub_request(:post, HUB_ENDPOINT).with(body: hub_json, headers: @headers)
+    stub = stub_request(:post, HUB_ENDPOINT).with { |request| JSON.parse(request.body) == hub_json && request.headers == @headers }
 
     request = xml_fixture('rej')
     post '/', request
@@ -40,7 +40,7 @@ describe UltraCartConnector do
 
   it 'responds to CO XML correctly' do
     hub_json = json_fixture('co')
-    stub = stub_request(:post, HUB_ENDPOINT).with(body: hub_json, headers: @headers)
+    stub = stub_request(:post, HUB_ENDPOINT).with { |request| JSON.parse(request.body) == hub_json && request.headers == @headers }
 
     request = xml_fixture('co')
     post '/', request
@@ -51,7 +51,7 @@ describe UltraCartConnector do
 
   it 'responds to CO XML without subscription correctly' do
     hub_json = json_fixture('co_no_sub')
-    stub = stub_request(:post, HUB_ENDPOINT).with(body: hub_json, headers: @headers)
+    stub = stub_request(:post, HUB_ENDPOINT).with { |request| JSON.parse(request.body) == hub_json && request.headers == @headers }
 
     request = xml_fixture('co_no_sub')
     post '/', request

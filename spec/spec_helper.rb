@@ -19,7 +19,7 @@ def xml_fixture(path)
 end
 
 def json_fixture(path)
-  IO.read(File.join(File.dirname(__FILE__), 'fixtures', 'json', "#{path}.json")).chomp
+  JSON.parse(IO.read(File.join(File.dirname(__FILE__), 'fixtures', 'json', "#{path}.json")).chomp)
 end
 
 RSpec.configure do |config|

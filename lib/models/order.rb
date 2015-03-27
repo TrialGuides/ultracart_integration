@@ -7,7 +7,7 @@ class Order < SpreeObject
     {
       id:               @ultracart_order.order_id,
       status:           'complete',
-      channel:          'ultracart',
+      channel:          'UltraCart',
       placed_on:        placed_on,
       email:            @ultracart_order.email,
 ##      channel_order_id: '',  # Custom field
@@ -36,7 +36,7 @@ class Order < SpreeObject
   end
 
   def placed_on
-    Time.parse(@ultracart_order.order_date).utc.iso8601
+    @ultracart_order.order_date.utc.iso8601
   end
 
   def totals
@@ -50,12 +50,12 @@ class Order < SpreeObject
   end
 
   def line_items
-    @ultracart_order.line_items.collect do |line_item|
+    @ultracart_order.items.collect do |item|
       {
-        product_id: line_item[0],
-        name:       line_item[2],
-        quantity:   line_item[1],
-        price:      line_item[3]
+        product_id: item.item_id,
+        name:       item.description,
+        quantity:   item.quantity,
+        price:      item.cost
       }
     end
   end
@@ -64,11 +64,11 @@ class Order < SpreeObject
   end
 
   def shipping_address
-    address(@ultracart_order.shipping_address, @ultracart_order.phone)
+    address(@ultracart_order.ship_to_address)
   end
 
   def billing_address
-    address(@ultracart_order.billing_address, @ultracart_order.phone)
+    address(@ultracart_order.bill_to_address)
   end
 
   def payments
@@ -81,7 +81,11 @@ class Order < SpreeObject
 
   private
 
-  def address(ultracart_address, phone)
+  def phone
+    @ultracart_order.day_phone || @ultracart_order.evening_phone
+  end
+
+  def address(ultracart_address)
     {
       firstname: ultracart_address.first_name,
       lastname:  ultracart_address.last_name,

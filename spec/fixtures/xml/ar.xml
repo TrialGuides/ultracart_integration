@@ -1,4 +1,7 @@
-<order>
+<?xml version="1.0" encoding="UTF-8"?>
+<export>
+  <export_location>unknown</export_location>
+  <order>
     <merchant_id>CCC</merchant_id>
     <order_id>CCC-15243</order_id>
     <order_date>17 MAR 2014 13:20:57</order_date>
@@ -108,3 +111,4 @@
     <transaction_details/>
     <customer_ip_address>24.234.56.116</customer_ip_address>
   </order>
+</export>

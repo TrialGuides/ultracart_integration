@@ -1,9 +1,12 @@
 source 'https://rubygems.org'
 
 gem 'sinatra',  '~> 1.4.5'
-gem 'nokogiri', '~> 1.6.1'
 gem 'httparty', '~> 0.13.1'
-gem 'carmen',   '~> 1.0.1'
+gem 'ultracart_xml_parser', github: 'TrialGuides/ultracart_xml_parser'
+
+group :development do
+  gem 'byebug'
+end
 
 group :production, :staging do
   gem 'newrelic_rpm'
