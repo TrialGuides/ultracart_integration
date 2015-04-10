@@ -1,4 +1,4 @@
-class Order < SpreeObject
+class Order < WombatObject
   def initialize(ultracart_order)
     super
   end

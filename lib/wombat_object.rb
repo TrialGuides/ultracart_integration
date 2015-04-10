@@ -1,4 +1,4 @@
-class SpreeObject
+class WombatObject
   def self.subclasses
     ObjectSpace.each_object(Class).select { |klass| klass < self }
   end

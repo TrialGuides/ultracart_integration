@@ -1,4 +1,4 @@
-class Subscription < SpreeObject
+class Subscription < WombatObject
   def initialize(ultracart_order)
     super
   end

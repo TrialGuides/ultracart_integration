@@ -14,7 +14,7 @@ class UltraCartIntegration < Sinatra::Base
   post '/' do
     response = HTTParty.post(
       HUB_ENDPOINT,
-      body: SpreeObject.data(@order).to_json,
+      body: WombatObject.data(@order).to_json,
       timeout: HUB_TIMEOUT,
       headers: {
         'X-Hub-Store'        => ENV['HUB_STORE'],

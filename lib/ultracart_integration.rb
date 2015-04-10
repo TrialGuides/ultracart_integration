@@ -1,6 +1,6 @@
 $:.unshift File.dirname(__FILE__)
 
-require 'spree_object'
+require 'wombat_object'
 
 require 'models/order'
 require 'models/shipment'
