@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe UltraCartConnector do
+describe UltraCartIntegration do
   before :each do
     @headers = { 'X-Hub-Store' => ENV['HUB_STORE'], 'X-Hub-Access-Token' => ENV['HUB_ACCESS_TOKEN'] }
   end

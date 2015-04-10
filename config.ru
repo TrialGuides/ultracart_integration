@@ -1,8 +1,8 @@
 require 'rubygems'
 require 'bundler'
 
-require './lib/ultracart_connector'
+require './lib/ultracart_integration'
 
 Bundler.require(:default, ENV['RACK_ENV'].to_sym)
-require './ultracart_connector'
-run UltraCartConnector
+require './ultracart_integration'
+run UltraCartIntegration

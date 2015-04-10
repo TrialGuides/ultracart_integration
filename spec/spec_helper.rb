@@ -5,13 +5,13 @@ Bundler.require(:default, :test)
 
 require 'webmock/rspec'
 
-require File.join(File.dirname(__FILE__), '..', 'lib', 'ultracart_connector')
-require File.join(File.dirname(__FILE__), '..', 'ultracart_connector')
+require File.join(File.dirname(__FILE__), '..', 'lib', 'ultracart_integration')
+require File.join(File.dirname(__FILE__), '..', 'ultracart_integration')
 
 Sinatra::Base.environment = 'test'
 
 def app
-  UltraCartConnector
+  UltraCartIntegration
 end
 
 def xml_fixture(path)

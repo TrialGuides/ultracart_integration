@@ -1,11 +1,10 @@
 require 'json'
 require 'ultracart_xml_parser'
-require 'byebug'
 
 HUB_ENDPOINT = ENV['HUB_ENDPOINT'] || 'https://wombat.co/push'
 HUB_TIMEOUT = ENV['HUB_TIMEOUT'] || 240
 
-class UltraCartConnector < Sinatra::Base
+class UltraCartIntegration < Sinatra::Base
   attr_reader :payload
 
   before do
