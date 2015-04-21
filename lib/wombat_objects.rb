@@ -16,8 +16,12 @@ module WombatObjects
       @ultracart_order = ultracart_order
     end
 
+    def wombat_object
+      self.class.name.split('::').last.downcase + 's'
+    end
+
     def serialize
-      { self.class.name.split('::').last.downcase + 's' => [ send(@ultracart_order.current_stage.downcase) ].compact }
+      { wombat_object => [ send(@ultracart_order.current_stage.downcase) ].compact }
     end
 
     def ar; end  # Accounts Receivable
