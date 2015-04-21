@@ -96,6 +96,4 @@ module WombatObjects
       }
     end
   end
-
-  @@wombat_objects << Order
 end

@@ -3,6 +3,10 @@ require 'set'
 module WombatObjects
   @@wombat_objects = Set.new
 
+  def self.register_object(object)
+    @@wombat_objects << object
+  end
+
   def self.object_list
     @@wombat_objects
   end
@@ -12,6 +16,10 @@ module WombatObjects
   end
 
   class Base
+    def self.inherited(klass)
+      WombatObjects.register_object(klass)
+    end
+
     def initialize(ultracart_order)
       @ultracart_order = ultracart_order
     end
