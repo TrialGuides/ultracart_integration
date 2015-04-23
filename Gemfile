@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
 
-gem 'sinatra',  '~> 1.4.5'
-gem 'httparty', '~> 0.13.1'
+gem 'sinatra'
+gem 'httparty'
 gem 'ultracart_xml_parser', github: 'TrialGuides/ultracart_xml_parser'
 
 group :development do
-  gem 'byebug'
+  gem 'pry'
 end
 
 group :production, :staging do
@@ -15,8 +15,10 @@ group :production, :staging do
 end
 
 group :test do
-  gem 'rspec',       '~> 2.14.1'
-  gem 'rspec-mocks', '~> 2.14.6'
-  gem 'rack-test',   '~> 0.6.2'
-  gem 'webmock',     '~> 1.17.4'
+  gem 'rspec'
+  gem 'webmock'
+  gem 'guard-rspec'
+  gem 'terminal-notifier-guard'
+  gem 'rb-fsevent', '~> 0.9.1'
+  gem 'rack-test'
 end
