@@ -49,7 +49,7 @@ module WombatObjects
     def line_items
       @ultracart_order.items.collect do |item|
         {
-          product_id: item.item_id,
+          product_id: item.sku || item.item_id,
           name:       item.description,
           quantity:   item.quantity,
           price:      item.cost
