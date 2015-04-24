@@ -8,7 +8,7 @@ class UltraCartIntegration < Sinatra::Base
   attr_reader :payload
 
   before do
-    @order = UltraCartXMLParser.parse(request.body.read)
+    @order = OrderDetails.parse(request.body.read)
   end
 
   post '/' do

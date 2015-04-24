@@ -1,6 +1,8 @@
 require 'spec_helper'
 
 describe UltraCartIntegration do
+  include Rack::Test::Methods
+
   before :each do
     @headers = { 'X-Hub-Store' => ENV['HUB_STORE'], 'X-Hub-Access-Token' => ENV['HUB_ACCESS_TOKEN'] }
   end
@@ -9,10 +11,9 @@ describe UltraCartIntegration do
     hub_json = json_fixture('ar')
     stub = stub_request(:post, HUB_ENDPOINT).with { |request| JSON.parse(request.body) == hub_json && request.headers == @headers }
 
-    request = xml_fixture('ar')
-    post '/', request
+    post '/', xml_fixture('ar')
 
-    stub.should have_been_requested
+    expect(stub).to have_been_requested
     expect(last_response).to be_ok
   end
 
@@ -20,10 +21,9 @@ describe UltraCartIntegration do
     hub_json = json_fixture('sd')
     stub = stub_request(:post, HUB_ENDPOINT).with { |request| JSON.parse(request.body) == hub_json && request.headers == @headers }
 
-    request = xml_fixture('sd')
-    post '/', request
+    post '/', xml_fixture('sd')
 
-    stub.should have_been_requested
+    expect(stub).to have_been_requested
     expect(last_response).to be_ok
   end
 
@@ -31,10 +31,9 @@ describe UltraCartIntegration do
     hub_json = json_fixture('rej')
     stub = stub_request(:post, HUB_ENDPOINT).with { |request| JSON.parse(request.body) == hub_json && request.headers == @headers }
 
-    request = xml_fixture('rej')
-    post '/', request
+    post '/', xml_fixture('rej')
 
-    stub.should have_been_requested
+    expect(stub).to have_been_requested
     expect(last_response).to be_ok
   end
 
@@ -42,10 +41,9 @@ describe UltraCartIntegration do
     hub_json = json_fixture('co')
     stub = stub_request(:post, HUB_ENDPOINT).with { |request| JSON.parse(request.body) == hub_json && request.headers == @headers }
 
-    request = xml_fixture('co')
-    post '/', request
+    post '/', xml_fixture('co')
 
-    stub.should have_been_requested
+    expect(stub).to have_been_requested
     expect(last_response).to be_ok
   end
 
@@ -53,18 +51,16 @@ describe UltraCartIntegration do
     hub_json = json_fixture('co_no_sub')
     stub = stub_request(:post, HUB_ENDPOINT).with { |request| JSON.parse(request.body) == hub_json && request.headers == @headers }
 
-    request = xml_fixture('co_no_sub')
-    post '/', request
+    post '/', xml_fixture('co_no_sub')
 
-    stub.should have_been_requested
+    expect(stub).to have_been_requested
     expect(last_response).to be_ok
   end
 
   it 'should fail on timeout' do
     stub_request(:post, HUB_ENDPOINT).to_timeout
 
-    request = xml_fixture('co')
-    post '/', request
+    post '/', xml_fixture('co')
 
     expect(last_response).to_not be_ok
   end

@@ -1,2 +1,4 @@
 .rbenv-*
 .bundle
+vendor
+tmp
