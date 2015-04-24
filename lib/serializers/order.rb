@@ -49,7 +49,7 @@ module WombatObjects
     def line_items
       @ultracart_order.items.collect do |item|
         {
-          product_id: item.sku || item.item_id,
+          product_id: item.manufacturer_sku || item.item_id,
           name:       item.description,
           quantity:   item.quantity,
           price:      item.cost
@@ -69,11 +69,11 @@ module WombatObjects
     end
 
     def payments
-      {
+      [{
         status:         'completed',
         amount:         @ultracart_order.total,
         payment_method: @ultracart_order.payment_method
-      }
+      }]
     end
 
     private
