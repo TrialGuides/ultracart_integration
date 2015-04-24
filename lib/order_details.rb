@@ -22,5 +22,9 @@ class OrderDetails
     def channel
       'Amazon.com'
     end
+
+    def payment_method
+      'Amazon'
+    end
   end
 end

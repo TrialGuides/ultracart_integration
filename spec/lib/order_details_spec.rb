@@ -31,6 +31,10 @@ describe OrderDetails do
     it 'returns a channel of UltraCart' do
       expect(order.channel).to eq('UltraCart')
     end
+
+    it 'returns the payment menthod from the UltraCart XML' do
+      expect(order.payment_method).to eq('Credit Card')
+    end
   end
 
   describe OrderDetails::ASCOrder do
@@ -45,5 +49,9 @@ describe OrderDetails do
     it 'returns a channel of Amazon.com' do
       expect(order.channel).to eq('Amazon.com')
     end
-  end
+
+    it 'returns the payment menthod of Amazon Payment' do
+      expect(order.payment_method).to eq('Amazon')
+    end
+end
 end
