@@ -1,8 +1,6 @@
 require 'spec_helper'
 
 describe UltraCartIntegration do
-  include Rack::Test::Methods
-
   before :each do
     @headers = { 'X-Hub-Store' => ENV['HUB_STORE'], 'X-Hub-Access-Token' => ENV['HUB_ACCESS_TOKEN'] }
   end
