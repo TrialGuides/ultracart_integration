@@ -51,8 +51,8 @@
       <quantity>1</quantity>
       <description>David Ball on Damages 3 (Hardcover)</description>
       <cost>110.00</cost>
-      <unit_cost_with_discount>110.00</unit_cost_with_discount>
-      <total_cost_with_discount>110.00</total_cost_with_discount>
+      <unit_cost_with_discount>105.00</unit_cost_with_discount>
+      <total_cost_with_discount>105.00</total_cost_with_discount>
       <cogs/>
       <actual_cogs/>
       <barcode>9781934833841</barcode>
@@ -63,7 +63,7 @@
       <special_product_type>BS</special_product_type>
       <free_shipping>false</free_shipping>
       <accounting_code>D3-Hardcover</accounting_code>
-      <discount>0.00</discount>
+      <discount>5.00</discount>
       <distribution_center_code>DFLT</distribution_center_code>
       <kit>N</kit>
       <kit_component>N</kit_component>

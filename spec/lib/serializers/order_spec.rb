@@ -3,7 +3,7 @@ require 'spec_helper'
 describe WombatObjects::Order do
   # Accounts Receivable
   context 'AR' do
-    let(:ultracart_order) { UltraCartXMLParser.parse(xml_fixture('ar')) }
+    let(:ultracart_order) { OrderDetails.parse(xml_fixture('ar')) }
     let(:order) { WombatObjects::Order.new(ultracart_order).ar }
 
     it 'returns the base Wombat fields' do
@@ -12,7 +12,6 @@ describe WombatObjects::Order do
       expect(order[:channel]).to eq('UltraCart')
       expect(Time.parse(order[:placed_on])).to eq(ultracart_order.order_date)
       expect(order[:email]).to eq(ultracart_order.email)
-      expect(order[:shipping_method]).to eq(ultracart_order.shipping_method)
       expect(order[:currency]).to eq('USD')
     end
 
@@ -25,11 +24,15 @@ describe WombatObjects::Order do
 
     it 'returns the Wombat line items' do
       line_item = order[:line_items].first
+      adjustment = line_item[:adjustments].first
       ultracart_item = ultracart_order.items.first
       expect(line_item[:product_id]).to eq(ultracart_item.manufacturer_sku)
       expect(line_item[:name]).to eq(ultracart_item.description)
       expect(line_item[:quantity]).to eq(ultracart_item.quantity)
       expect(line_item[:price]).to eq(ultracart_item.cost)
+      expect(adjustment[:name]).to eq('Line Item Discount')
+      expect(adjustment[:value]).to eq(-5.00)
+      expect(adjustment[:promotion]).to eq(true)
     end
 
     it 'returns the Wombat shipping address' do

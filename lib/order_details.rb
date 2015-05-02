@@ -1,6 +1,6 @@
 require 'delegate'
 
-class OrderDetails
+module OrderDetails
   def self.parse(ultracart_xml)
     order = UltraCartXMLParser.parse(ultracart_xml)
     partner_code = order.channel_partner_code || 'UltraCart'

@@ -4,11 +4,9 @@ module WombatObjects
       {
         id:               @ultracart_order.order_id,
         status:           'complete',
-        channel:          'UltraCart',
+        channel:          @ultracart_order.channel,
         placed_on:        placed_on,
         email:            @ultracart_order.email,
-        ##      channel_order_id: '',  # Custom field
-        shipping_method:  @ultracart_order.shipping_method,  # Custom field
         currency:         'USD',
         totals:           totals,
         line_items:       line_items,
@@ -32,6 +30,8 @@ module WombatObjects
       }
     end
 
+    private
+
     def placed_on
       @ultracart_order.order_date.utc.iso8601
     end
@@ -47,17 +47,28 @@ module WombatObjects
     end
 
     def line_items
-      @ultracart_order.items.collect do |item|
+      @ultracart_order.items.map do |item|
         {
-          product_id: item.manufacturer_sku || item.item_id,
-          name:       item.description,
-          quantity:   item.quantity,
-          price:      item.cost
+          product_id:  item.manufacturer_sku || item.item_id,
+          name:        item.description,
+          quantity:    item.quantity,
+          price:       item.cost,
+          adjustments: line_item_adjustments(item)
         }
       end
     end
 
     def adjustments
+    end
+
+    def line_item_adjustments(line_item)
+      return [] if line_item.discount.nil? || line_item.discount == 0.00
+
+      [{
+         name:      'Line Item Discount',
+         value:     line_item.discount * -1,
+         promotion: true
+       }]
     end
 
     def shipping_address
@@ -75,8 +86,6 @@ module WombatObjects
         payment_method: @ultracart_order.payment_method
       }]
     end
-
-    private
 
     def phone
       @ultracart_order.day_phone || @ultracart_order.evening_phone
