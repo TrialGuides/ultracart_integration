@@ -1,5 +1,7 @@
 module WombatObjects
   class Order < Base
+    include WombatObjects::Address
+
     def ar
       {
         id:               @ultracart_order.order_id,
@@ -26,7 +28,7 @@ module WombatObjects
     def rej
       {
         id:     @ultracart_order.order_id,
-        status: 'cancelled'
+        status: 'canceled'
       }
     end
 
@@ -85,24 +87,6 @@ module WombatObjects
         amount:         @ultracart_order.total,
         payment_method: @ultracart_order.payment_method
       }]
-    end
-
-    def phone
-      @ultracart_order.day_phone || @ultracart_order.evening_phone
-    end
-
-    def address(ultracart_address)
-      {
-        firstname: ultracart_address.first_name,
-        lastname:  ultracart_address.last_name,
-        address1:  ultracart_address.address1,
-        address2:  ultracart_address.address2,
-        zipcode:   ultracart_address.zip,
-        city:      ultracart_address.city,
-        state:     ultracart_address.state,
-        country:   ultracart_address.country_code,
-        phone:     phone
-      }
     end
   end
 end

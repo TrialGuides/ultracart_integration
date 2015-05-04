@@ -75,7 +75,7 @@ describe WombatObjects::Order do
 
     it 'returns the base Wombat field' do
       expect(order[:id]).to eq(ultracart_order.order_id)
-      expect(order[:status]).to eq('cancelled')
+      expect(order[:status]).to eq('canceled')
     end
   end
   

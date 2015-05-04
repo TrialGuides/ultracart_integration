@@ -1,1 +1,1 @@
-{"shipments":[],"orders":[{"id":"CCC-15243","status":"cancelled"}]}
+{"shipments":[{"id":"CCC-15243","status":"canceled"}],"orders":[{"id":"CCC-15243","status":"canceled"}]}
