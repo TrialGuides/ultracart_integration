@@ -46,6 +46,8 @@ describe WombatObjects::Shipment do
     it 'returns the base Wombat fields' do
       expect(shipment[:id]).to eq(ultracart_order.order_id)
       expect(shipment[:status]).to eq('shipped')
+      expect(Time.parse(shipment[:shipped_at])).to eq(ultracart_order.shipping_date_time)
+      expect(shipment[:tracking]).to eq(ultracart_order.shipping_tracking_number)
     end
   end
 

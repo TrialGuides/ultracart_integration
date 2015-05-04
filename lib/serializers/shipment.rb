@@ -18,7 +18,9 @@ module WombatObjects
     def co
       {
         id: @ultracart_order.order_id,
-        status: 'shipped'
+        status: 'shipped',
+        shipped_at: @ultracart_order.shipping_date_time.utc.iso8601,
+        tracking: @ultracart_order.shipping_tracking_number
       }
     end
 
