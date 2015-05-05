@@ -36,6 +36,21 @@ describe WombatObjects::Shipment do
       expect(line_item[:name]).to eq(ultracart_item.description)
       expect(line_item[:quantity]).to eq(ultracart_item.quantity)
     end
+
+    context 'when it has a shipping adjustment' do
+      it 'has a valid adjustments attibute' do
+        allow(ultracart_order).to receive(:shipping_handling_total_discount).and_return(5.00)
+        adjustments = shipment[:adjustments].first
+        expect(adjustments[:name]).to eq('Shipping Discount')
+        expect(adjustments[:value]).to eq(-5.00)
+      end
+    end
+
+    context 'when it does not have a shipping adjustment' do
+      it 'has an empty adjustments attribute' do
+        expect(shipment[:adjustments]).to be_empty
+      end
+    end
   end
 
   # Complete

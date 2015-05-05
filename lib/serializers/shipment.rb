@@ -11,7 +11,8 @@ module WombatObjects
         status: 'ready',
         shipping_method: @ultracart_order.shipping_method,
         shipping_address: address(@ultracart_order.ship_to_address),
-        items: items
+        items: items,
+        adjustments: shipping_adjustments
       }
     end
 
@@ -41,6 +42,16 @@ module WombatObjects
           quantity:    item.quantity
         }
       end
+    end
+
+    def shipping_adjustments
+      shipping_discount = @ultracart_order.shipping_handling_total_discount
+      return [] if shipping_discount.nil? || shipping_discount == 0.00
+
+      [{
+         name: 'Shipping Discount',
+         value: shipping_discount * -1,
+       }]
     end
   end
 end
