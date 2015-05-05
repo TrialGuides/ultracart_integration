@@ -82,11 +82,27 @@ module WombatObjects
     end
 
     def payments
-      [{
+      [payment, gift_certificate].compact
+    end
+
+    def payment
+      {
         status:         'completed',
         amount:         @ultracart_order.total,
         payment_method: @ultracart_order.payment_method
-      }]
+      }
+    end
+
+    def gift_certificate
+      gift_certificate_amount = @ultracart_order.gift_certificate_amount
+      return if gift_certificate_amount.nil? || gift_certificate_amount == 0.00
+
+      {
+        status:         'completed',
+        amount:         @ultracart_order.gift_certificate_amount,
+        code:           @ultracart_order.gift_certificate_code,
+        payment_method: 'Gift Certificate'
+      }
     end
   end
 end

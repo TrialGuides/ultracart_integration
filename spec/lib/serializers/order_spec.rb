@@ -88,11 +88,25 @@ describe WombatObjects::Order do
       expect(order[:id]).to eq(ultracart_order.order_id)
     end
 
-    it 'returns the Wombat payments' do
-      payment = order[:payments].first
-      expect(payment[:status]).to eq('completed')
-      expect(payment[:amount]).to eq(ultracart_order.total)
-      expect(payment[:payment_method]).to eq(ultracart_order.payment_method)
+    context 'without gift certificate' do
+      it 'returns the Wombat payments' do
+        payment = order[:payments].first
+        expect(payment[:status]).to eq('completed')
+        expect(payment[:amount]).to eq(ultracart_order.total)
+        expect(payment[:payment_method]).to eq(ultracart_order.payment_method)
+      end
+    end
+
+    context 'with gift certificate' do
+      it 'returns a gift certificate payment' do
+        allow(ultracart_order).to receive(:gift_certificate_amount).and_return(7.00)
+        allow(ultracart_order).to receive(:gift_certificate_code).and_return('QAWS1029')
+        payment = order[:payments].last
+        expect(payment[:status]).to eq('completed')
+        expect(payment[:amount]).to eq(ultracart_order.gift_certificate_amount)
+        expect(payment[:code]).to eq(ultracart_order.gift_certificate_code)
+        expect(payment[:payment_method]).to eq('Gift Certificate')
+      end
     end
   end
 end
