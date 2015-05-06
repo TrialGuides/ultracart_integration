@@ -12,6 +12,10 @@ module OrderDetails
     def channel
       'UltraCart'
     end
+
+    def order_adjustment
+      subtotal_discount > 0.00 ? subtotal_discount * -1 : 0.00
+    end
   end
 
   class ASCOrder < SimpleDelegator
@@ -25,6 +29,10 @@ module OrderDetails
 
     def payment_method
       'Amazon'
+    end
+
+    def order_adjustment
+      subtotal_discount > 0.00 ? subtotal_discount * -1 : 0.00
     end
   end
 end

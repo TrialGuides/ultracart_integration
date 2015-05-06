@@ -12,7 +12,7 @@ module WombatObjects
         currency:         'USD',
         totals:           totals,
         line_items:       line_items,
-        ##      adjustments:      adjustments,
+        adjustments:      order_adjustments,
         shipping_address: shipping_address,
         billing_address:  billing_address
       }
@@ -41,7 +41,7 @@ module WombatObjects
     def totals
       {
         item:       @ultracart_order.subtotal,
-        ##      adjustment: '',
+        adjustment: @ultracart_order.order_adjustment,
         tax:        @ultracart_order.tax,
         shipping:   @ultracart_order.shipping_handling_total,
         order:      @ultracart_order.total
@@ -60,7 +60,13 @@ module WombatObjects
       end
     end
 
-    def adjustments
+    def order_adjustments
+      return [] if @ultracart_order.order_adjustment == 0.00
+
+      [{
+         name:  'Order Discount',
+         value: @ultracart_order.order_adjustment
+       }]
     end
 
     def line_item_adjustments(line_item)

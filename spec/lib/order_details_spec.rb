@@ -35,6 +35,19 @@ describe OrderDetails do
     it 'returns the payment menthod from the UltraCart XML' do
       expect(order.payment_method).to eq('Credit Card')
     end
+
+    context 'when there is not an order adjustment' do
+      it 'should have a 0.00 order adjustment' do
+        expect(order.order_adjustment).to eq(0.00)
+      end
+    end
+
+    context 'when there is an order adjustment' do
+      it 'should return the correct order_adjustment' do
+        allow(order).to receive(:subtotal_discount).and_return(5.00)
+        expect(order.order_adjustment).to eq(-5.00)
+      end
+    end
   end
 
   describe OrderDetails::ASCOrder do
@@ -53,5 +66,18 @@ describe OrderDetails do
     it 'returns the payment menthod of Amazon Payment' do
       expect(order.payment_method).to eq('Amazon')
     end
-end
+
+    context 'when there is not an order adjustment' do
+      it 'should have a 0.00 order adjustment' do
+        expect(order.order_adjustment).to eq(0.00)
+      end
+    end
+
+    context 'when there is an order adjustment' do
+      it 'should return the correct order_adjustment' do
+        allow(order).to receive(:subtotal_discount).and_return(5.00)
+        expect(order.order_adjustment).to eq(-5.00)
+      end
+    end
+  end
 end

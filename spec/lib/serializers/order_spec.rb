@@ -16,10 +16,12 @@ describe WombatObjects::Order do
     end
 
     it 'returns the Wombat totals' do
-      expect(order[:totals][:item]).to eq(ultracart_order.subtotal)
-      expect(order[:totals][:tax]).to eq(ultracart_order.tax)
-      expect(order[:totals][:shipping]).to eq(ultracart_order.shipping_handling_total)
-      expect(order[:totals][:order]).to eq(ultracart_order.total)
+      totals = order[:totals]
+      expect(totals[:item]).to eq(ultracart_order.subtotal)
+      expect(totals[:adjustment]).to eq(ultracart_order.subtotal_discount)
+      expect(totals[:tax]).to eq(ultracart_order.tax)
+      expect(totals[:shipping]).to eq(ultracart_order.shipping_handling_total)
+      expect(totals[:order]).to eq(ultracart_order.total)
     end
 
     it 'returns the Wombat line items' do
@@ -63,8 +65,20 @@ describe WombatObjects::Order do
       expect(address[:phone]).to eq(ultracart_order.day_phone)
     end
 
-    it 'returns the Wombat order adjustment' do
-      # TODO
+    context 'when there are no order adjustments' do
+      it 'returns an empty adjustment' do
+        expect(order[:adjustments]).to be_empty
+      end
+    end
+
+    context 'when there are order adjustments' do
+      it 'returns the Wombat order adjustment' do
+        allow(ultracart_order).to receive(:subtotal_discount).and_return(5.00)
+        adjustment = order[:adjustments].first
+        expect(adjustment[:name]).to eq('Order Discount')
+        expect(adjustment[:value]).to eq(ultracart_order.subtotal_discount * -1)
+        expect(order[:totals][:adjustment]).to eq(ultracart_order.subtotal_discount * -1)
+      end
     end
   end
 
